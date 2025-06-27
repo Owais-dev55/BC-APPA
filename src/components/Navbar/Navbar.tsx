@@ -1,6 +1,16 @@
 import React from 'react';
 import { GoArrowRight } from "react-icons/go";
 const Navbar = () => {
+  const Navlinks = [
+    'Home',
+    'About',
+    'How it works',
+    'Features',
+    'Our App',
+    'Blog',
+    'Testimonials',
+    "FAQ's",
+  ]
   return (
     <div className='h-[106px] w-full flex items-center justify-between px-[100px] font-[Urbanist]'>
       
@@ -12,16 +22,7 @@ const Navbar = () => {
       </div>
 
       <div className='flex items-center gap-[30px] h-full'>
-        {[
-          'Home',
-          'About',
-          'How it works',
-          'Features',
-          'Our App',
-          'Blog',
-          'Testimonials',
-          "FAQ's",
-        ].map((item, index) => (
+        {Navlinks.map((item, index) => (
           <div key={index} className='flex items-center justify-center h-full'>
             <p className='font-semibold text-[#282C32] leading-7 whitespace-nowrap'>
               {item}
