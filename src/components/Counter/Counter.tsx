@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useMemo } from "react";
 import Image from "next/image";
 
 const Counter = () => {
@@ -7,24 +7,25 @@ const Counter = () => {
   const statsRef = useRef<HTMLDivElement>(null);
   const [hasAnimated, setHasAnimated] = useState(false);
 
-  const counterData = [
-    {
-      value: "56+",
-      title: "Customers visit app every months",
-    },
-    {
-      value: "10k+",
-      title: "Total downloaded of our app",
-    },
-    {
-      value: "156+",
-      title: "Total Members of App Users",
-    },
-    {
-      value: "4.9",
-      title: "Satisfaction rate from our customers.",
-    },
-  ];
+  const counterData = useMemo(() => [
+  {
+    value: "56+",
+    title: "Customers visit app every months",
+  },
+  {
+    value: "10k+",
+    title: "Total downloaded of our app",
+  },
+  {
+    value: "156+",
+    title: "Total Members of App Users",
+  },
+  {
+    value: "4.9",
+    title: "Satisfaction rate from our customers.",
+  },
+], []);
+
 
   const getNumericValue = (value: string) => {
     const num = parseFloat(value.replace(/[^0-9.]/g, ""));
@@ -42,7 +43,7 @@ const Counter = () => {
       const targetValues = counterData.map((item) =>
         getNumericValue(item.value)
       );
-      const suffixValues = counterData.map((item) => getSuffix(item.value));
+      
       const isDecimal = counterData.map((item) => item.value.includes("."));
 
       const duration = 2000;
