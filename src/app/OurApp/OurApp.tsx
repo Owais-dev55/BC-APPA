@@ -1,88 +1,107 @@
+"use client";
+import React from "react";
 import Image from "next/image";
 import Overlay from "@/components/Reuseables/Overlay";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/autoplay";
+
+const sliderImages = [
+  "/mobile-left.jpg",
+  "/slider2.jpg",
+  "/slider3.jpg",
+  "/slider4.jpg",
+  "/mobile-left.jpg",
+  "/slider2.jpg",
+  "/slider3.jpg",
+  "/center-screen.jpg",
+];
 
 const OurApp = () => {
   return (
-    <div className="w-full bg-[#8670E5]  flex flex-col items-center py-10 sm:py-16">
-      <div className="flex flex-col items-center gap-5 mt-8 sm:mt-10 px-4 max-w-4xl">
-        <Overlay 
-          text="Our App" 
-          width={127} 
-          color="#FFFFFF" 
-          backgroundColor="rgba(255, 255, 255, 0.15)" 
+    <section className="w-full bg-[#8670E5] flex flex-col items-center py-10 sm:py-16 overflow-hidden">
+      {/* Section Heading */}
+      <div className="flex flex-col items-center gap-5 mt-8 sm:mt-10 max-w-4xl text-center px-4">
+        <Overlay
+          text="Our App"
+          width={127}
+          color="#FFFFFF"
+          backgroundColor="rgba(255, 255, 255, 0.15)"
         />
-        <h2 className="text-4xl sm:text-3xl md:text-4xl font-bold text-[#FFFFFF] text-center">
+        <h2 className="text-4xl sm:text-3xl md:text-4xl font-bold text-white">
           Join BC Appa Today - Where Your Money Is Always Protected!
         </h2>
       </div>
 
-      <div className="w-full max-w-[1450px] flex flex-wrap justify-center items-center gap-6 sm:gap-8 mt-10 md:mt-20 px-4">
-        <div className="h-[500px] w-[240px] hidden lg:block">
-          <Image
-            src="/mobile-left.jpg"
-            alt="App screenshot"
-            width={240}
-            height={500}
-            className="object-cover rounded-[30px] h-full w-full"
-          />
-        </div>
-        <div className="h-[500px] w-[240px] hidden lg:block">
-          <Image
-            src="/slider2.jpg"
-            alt="App screenshot"
-            width={240}
-            height={500}
-            className="object-cover rounded-[30px] h-full w-full"
-          />
-        </div>
+      {/* Slider + Frame */}
+      <div className="relative w-full max-w-[1600px] mt-20 mx-auto">
+        {/* Swiper Slider */}
+        <Swiper
+          modules={[Autoplay]}
+          loop={true}
+          centeredSlides={true}
+          autoplay={{
+            delay: 2000,
+            disableOnInteraction: false,
+          }}
+          speed={1000}
+          spaceBetween={8}
+          breakpoints={{
+            0: {
+              slidesPerView: 1,
+              spaceBetween: 10,
+            },
+            480: {
+              slidesPerView: 1,
+              spaceBetween: 16,
+            },
+            768: {
+              slidesPerView: 3,
+              spaceBetween: 24,
+            },
+            1024: {
+              slidesPerView: 4,
+              spaceBetween: 24,
+            },
+            1280: {
+              slidesPerView: 5,
+              spaceBetween: 24,
+            },
+          }}
+        >
+          {sliderImages.map((src, index) => (
+            <SwiperSlide key={index} className="flex justify-center">
+              <div 
+              className="relative w-[225px] ml-20 sm:ml-24 2xl:ml-[4px] xl:ml-[-4px] md:ml-[-2px]  h-[470px] sm:w-[200px] sm:h-[505px] md:w-[255px] md:h-[535px] 2xl:w-[275px] 2xl:h-[565px]"
+              
+              >
+                <Image
+                  src={src}
+                  alt={`Phone ${index}`}  
+                  fill
+                  className="rounded-[30px] object-cover"
+                />
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
 
-        {/* Center phone - PERFECT FIT */}
-        <div className="w-[280px] sm:w-[300px] relative aspect-[340/620]">
-          {/* Screen - placed at the bottom of the stack */}
-          <div className="absolute inset-0 flex items-center justify-center p-[8.2%] z-0">
-            <div className="relative w-full h-full rounded-[30px] overflow-hidden">
-              <Image
-                src="/center-screen.jpg"
-                alt="App screen"
-                fill
-                className="object-cover"
-              />
-            </div>
-          </div>
-          
-          {/* Frame - placed on top with higher z-index */}
-          <div className="absolute inset-0 z-10">
+        {/* Center frame overlay */}
+        <div className="absolute top-1/2 left-1/2 z-30 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none">
+          <div className="relative w-[280px] md:w-[320px] 2xl:w-[340px] aspect-[340/620]">
             <Image
               src="/center-frame.png"
               alt="Phone frame"
               fill
-              className="object-contain"
+              className="object-contain"  
             />
           </div>
         </div>
-
-        {/* Right images - show only on large screens */}
-        <div className="h-[500px] w-[240px] hidden lg:block">
-          <Image
-            src="/slider3.jpg"
-            alt="App screenshot"
-            width={240}
-            height={500}
-            className="object-cover rounded-[30px] h-full w-full"
-          />
-        </div>
-        <div className="h-[500px] w-[240px] hidden lg:block">
-          <Image
-            src="/slider4.jpg"
-            alt="App screenshot"
-            width={240}
-            height={500}
-            className="object-cover rounded-[30px] h-full w-full"
-          />
-        </div>
       </div>
-    </div>
+    </section>
   );
 };
 
 export default OurApp;
+

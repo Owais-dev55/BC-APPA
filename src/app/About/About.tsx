@@ -1,8 +1,18 @@
+"use client";
+import React , {useEffect} from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 import Image from "next/image";
 import { FaCheckCircle } from "react-icons/fa";
 import Overlay from "@/components/Reuseables/Overlay";
 
 const CircularProfiles = () => {
+  useEffect(() => {
+    AOS.init({
+      duration: 500,
+      once: true,
+    });
+  }, []);
   const checklists = [
     {
       head: "Guaranteed Protection ",
@@ -23,10 +33,12 @@ const CircularProfiles = () => {
   ];
 
   return (
-    <div className="w-full min-h-screen flex flex-col lg:flex-row justify-center lg:justify-evenly items-center font-[Urbanist] py-8 lg:py-0 px-4 lg:px-0">
+    <div data-aos="zoom-in-up"
+    className="w-full min-h-screen flex flex-col lg:flex-row justify-center lg:justify-evenly items-center font-[Urbanist] py-8 lg:py-0 px-4 lg:px-0">
       <div className="relative w-[300px] h-[300px] sm:w-[350px] sm:h-[350px] md:w-[400px] md:h-[400px] lg:w-[420px] lg:h-[420px] xl:w-[460px] xl:h-[460px] 2xl:w-[490px] 2xl:h-[490px] mb-8 lg:mb-0 flex-shrink-0">
         <div className="absolute -top-6 sm:-top-8 lg:-top-10">
           <Image
+          style={{ animation: 'spin 5s linear infinite' }}
             src="/blue-star.png"
             alt="star image"
             width={50}
@@ -34,7 +46,8 @@ const CircularProfiles = () => {
             className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 2xl:w-[50px] 2xl:h-[50px]"
           />
         </div>
-        <div className="absolute inset-3 sm:inset-4 lg:inset-4 w-[calc(100%-1.5rem)] sm:w-[calc(100%-2rem)] lg:w-[calc(100%-2rem)] h-[calc(100%-1.5rem)] sm:h-[calc(100%-2rem)] lg:h-[calc(100%-2rem)] border-2 sm:border-3 lg:border-4 border-dashed border-purple-200 rounded-full opacity-60"></div>
+        <div style={{ animation: 'spin 10s linear infinite' }}
+        className="absolute inset-3 sm:inset-4 lg:inset-4 w-[calc(100%-1.5rem)] sm:w-[calc(100%-2rem)] lg:w-[calc(100%-2rem)] h-[calc(100%-1.5rem)] sm:h-[calc(100%-2rem)] lg:h-[calc(100%-2rem)] border-2 sm:border-3 lg:border-4 border-dashed border-purple-200 rounded-full opacity-60 "></div>
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
           <div className="w-[210px] h-[205px] sm:w-[250px] sm:h-[245px] md:w-[290px] md:h-[285px] lg:w-[300px] lg:h-[295px] xl:w-[325px] xl:h-[318px] 2xl:w-[350px] 2xl:h-[341px] rounded-full bg-[#8670E5]/8 border-[3px] sm:border-[4px] lg:border-[5.74px] border-[rgba(134,112,229,0.1)] flex items-center justify-center">
             <div className="w-[110px] h-[110px] sm:w-[130px] sm:h-[130px] md:w-[150px] md:h-[150px] lg:w-[155px] lg:h-[155px] xl:w-[170px] xl:h-[170px] 2xl:w-[180px] 2xl:h-[180px] bg-[rgba(134,112,229,0.2)] rounded-full flex items-center justify-center">

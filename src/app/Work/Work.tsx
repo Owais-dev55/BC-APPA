@@ -1,10 +1,20 @@
-import React from "react";
+"use client";
+import React , {useEffect} from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 import Overlay from "@/components/Reuseables/Overlay";
 import Image from "next/image";
 
 const Work = () => {
+  useEffect(() => {
+    AOS.init({
+      duration: 3000,
+      easing: "ease-in-out",
+    });
+  } , []);
   return (
-    <div className="w-full py-12 sm:py-16 md:py-20 font-[Urbanist] bg-gradient-to-b from-white to-[#FAF8FF]">
+    <div data-aos="fade-right"
+    className="w-full py-12 sm:py-16 md:py-20 font-[Urbanist] bg-gradient-to-b from-white to-[#FAF8FF]">
       <div className="max-w-[1450px] w-full mx-auto flex flex-col justify-center items-center gap-8 px-4">
         {/* Header */}
         <div className="flex flex-col items-center gap-4 text-center">

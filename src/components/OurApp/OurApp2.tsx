@@ -1,9 +1,20 @@
+'use client'
+import React , {useEffect} from "react"
+import AOS from "aos"
+import "aos/dist/aos.css"
 import Image from "next/image"
 import Overlay from "../Reuseables/Overlay"
 
 const OurApp2 = () => {
+  useEffect(() => {
+    AOS.init({
+      duration: 3000,
+      easing: "ease-in-out",
+    })
+  })
   return (
-    <div className="w-[95%] sm:w-[97%] lg:w-[99%] h-auto lg:h-[500px] xl:h-[550px] 2xl:h-[600px] bg-[#8670E5] mt-8 sm:mt-12 lg:mt-20 font-[Urbanist] flex flex-col lg:flex-row rounded-[30px] sm:rounded-[40px] lg:rounded-[50px] mx-auto relative overflow-hidden py-8 lg:py-0">
+    <div data-aos="fade-down"
+     className="w-[95%] sm:w-[97%] lg:w-[99%] h-auto lg:h-[500px] xl:h-[550px] 2xl:h-[600px] bg-[#8670E5] mt-8 sm:mt-12 lg:mt-20 font-[Urbanist] flex flex-col lg:flex-row rounded-[30px] sm:rounded-[40px] lg:rounded-[50px] mx-auto relative overflow-hidden py-8 lg:py-0">
       {/* Decorative Corner */}
       <div className="absolute top-0 left-0">
         <Image

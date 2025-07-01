@@ -1,31 +1,33 @@
 "use client";
-import { useEffect, useState, useRef, useMemo } from "react";
+import { useEffect, useState, useRef, useMemo, useCallback } from "react";
 import Image from "next/image";
 
 const Counter = () => {
   const [counters, setCounters] = useState<number[]>([0, 0, 0, 0]);
   const statsRef = useRef<HTMLDivElement>(null);
-  const [hasAnimated, setHasAnimated] = useState(false);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
-  const counterData = useMemo(() => [
-  {
-    value: "56+",
-    title: "Customers visit app every months",
-  },
-  {
-    value: "10k+",
-    title: "Total downloaded of our app",
-  },
-  {
-    value: "156+",
-    title: "Total Members of App Users",
-  },
-  {
-    value: "4.9",
-    title: "Satisfaction rate from our customers.",
-  },
-], []);
-
+  const counterData = useMemo(
+    () => [
+      {
+        value: "56+",
+        title: "Customers visit app every months",
+      },
+      {
+        value: "10k+",
+        title: "Total downloaded of our app",
+      },
+      {
+        value: "156+",
+        title: "Total Members of App Users",
+      },
+      {
+        value: "4.9",
+        title: "Satisfaction rate from our customers.",
+      },
+    ],
+    []
+  );
 
   const getNumericValue = (value: string) => {
     const num = parseFloat(value.replace(/[^0-9.]/g, ""));
@@ -36,61 +38,66 @@ const Counter = () => {
     return value.replace(/[0-9.]/g, "") || "";
   };
 
+  const startCounters = useCallback(() => {
+    const targetValues = counterData.map((item) => getNumericValue(item.value));
+    const isDecimal = counterData.map((item) => item.value.includes("."));
+    const duration = 2000;
+    const steps = 50;
+    const stepTime = duration / steps;
+
+    let currentStep = 0;
+
+    if (intervalRef.current) clearInterval(intervalRef.current);
+
+    intervalRef.current = setInterval(() => {
+      currentStep++;
+      if (currentStep <= steps) {
+        const progress = currentStep / steps;
+        setCounters(
+          targetValues.map((target, i) => {
+            const value = target * progress;
+            return isDecimal[i]
+              ? parseFloat(value.toFixed(1))
+              : Math.floor(value);
+          })
+        );
+      } else {
+        setCounters(targetValues);
+        clearInterval(intervalRef.current!);
+        intervalRef.current = null;
+      }
+    }, stepTime);
+  }, [counterData]);
+
   useEffect(() => {
-    if (hasAnimated) return;
-
-    const startCounters = () => {
-      const targetValues = counterData.map((item) =>
-        getNumericValue(item.value)
-      );
-      
-      const isDecimal = counterData.map((item) => item.value.includes("."));
-
-      const duration = 2000;
-      const steps = 50;
-      const stepTime = duration / steps;
-
-      let currentStep = 0;
-
-      const interval = setInterval(() => {
-        currentStep++;
-
-        if (currentStep <= steps) {
-          const progress = currentStep / steps;
-          setCounters(
-            targetValues.map((target, i) => {
-              const value = target * progress;
-              return isDecimal[i]
-                ? parseFloat(value.toFixed(1))
-                : Math.floor(value);
-            })
-          );
-        } else {
-          setCounters(targetValues);
-          clearInterval(interval);
-        }
-      }, stepTime);
-    };
+    const currentRef = statsRef.current;
 
     const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting) {
+      ([entry]) => {
+        if (entry.isIntersecting) {
           startCounters();
-          setHasAnimated(true);
-          observer.disconnect();
+        } else {
+          setCounters([0, 0, 0, 0]);
+          if (intervalRef.current) {
+            clearInterval(intervalRef.current);
+            intervalRef.current = null;
+          }
         }
       },
-      { threshold: 0.1 }
+      {
+        threshold: 0.3,
+      }
     );
 
-    if (statsRef.current) {
-      observer.observe(statsRef.current);
+    if (currentRef) {
+      observer.observe(currentRef);
     }
 
     return () => {
-      observer.disconnect();
+      if (currentRef) observer.unobserve(currentRef);
+      if (intervalRef.current) clearInterval(intervalRef.current);
     };
-  }, [hasAnimated, counterData]);
+  }, [counterData, startCounters]);
 
   return (
     <div className="relative w-full max-w-[1450px] mx-auto rounded-[30px] overflow-hidden shadow-xl font-[Urbanist]">

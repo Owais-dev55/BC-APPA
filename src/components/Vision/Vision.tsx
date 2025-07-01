@@ -1,8 +1,18 @@
+'use client'
 import Image from "next/image";
-import React from "react";
+import React , {useEffect} from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 import Overlay from "../Reuseables/Overlay";
 
 const Vision = () => {
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      once: false,
+      easing: "ease-in-out",
+    });
+  })
   return (
     <div className="w-[98%] lg:h-[80vh] bg-[#FAF8FF] rounded-[30px] md:rounded-[50px] mx-auto flex flex-col lg:flex-row justify-between items-center font-[Urbanist] py-10 md:py-0">
       <div className="w-full lg:w-1/2 px-5 sm:px-8 md:px-10 lg:ml-10 flex justify-center items-center">
@@ -32,6 +42,7 @@ const Vision = () => {
       <div className="w-full lg:w-1/2 mt-10 lg:mt-0 flex justify-center items-center px-4">
         <div className="w-full max-w-[280px] sm:max-w-[350px] md:max-w-[400px] lg:max-w-[500px] aspect-square">
           <Image
+            data-aos="zoom-in-left"
             src="/arrow-image.png"
             alt="Vision illustration"
             width={404}

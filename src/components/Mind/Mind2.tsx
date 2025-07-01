@@ -29,7 +29,7 @@ const Mind2 = () => {
         {boxContent.map((item, index) => (
           <div
             key={index}
-            className="w-full max-w-full sm:max-w-[600px] flex flex-col justify-center items-center gap-5 sm:gap-7 border border-[#D5D5D5] rounded-xl sm:rounded-2xl py-6 sm:py-8 md:py-10 px-4 sm:px-6 text-center"
+            className="w-full max-w-full sm:max-w-[600px] flex flex-col justify-center items-center gap-5 sm:gap-7 border border-[#D5D5D5] rounded-xl sm:rounded-2xl py-6 sm:py-8 md:py-10 px-4 sm:px-6 text-center hover:shadow-lg transition-shadow duration-300 hover:bg-[#7444FD14] hover:border-[#7444FD26] hover:scale-105"
           >
             <div className="flex justify-center items-center">
               <Image

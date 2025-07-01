@@ -1,6 +1,17 @@
+"use client";
+import React , {useEffect} from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 import Image from "next/image";
 import Overlay from "@/components/Reuseables/Overlay";
+
 const Features = () => {
+  useEffect(() => {
+    AOS.init({
+      duration: 2000,
+      once: false,
+    });
+  })
   return (
     <div className="w-full min-h-screen flex flex-col items-center mt-8 sm:mt-12 lg:mt-14 mb-6 sm:mb-8 lg:mb-10 gap-8 sm:gap-12 lg:gap-16 px-4 font-[Urbanist]">
       <div className="w-full max-w-[1450px] flex flex-col items-center gap-4 text-center">
@@ -16,6 +27,7 @@ const Features = () => {
         <div className="relative w-full flex justify-center mb-8">
           <div className="w-[300px] h-[300px] sm:w-[400px] sm:h-[400px] md:w-[450px] md:h-[450px] relative">
             <Image
+            data-os="zoom-in"
               src="/dummy-pic.png"
               alt="Feature center"
               width={560}
@@ -186,6 +198,7 @@ const Features = () => {
           {/* Center Large Image - EXACTLY ORIGINAL */}
           <div className="relative w-[560px] h-[560px] z-10 -mt-10">
             <Image
+              data-aos="zoom-in"
               src="/dummy-pic.png"
               alt="Feature center"
               width={560}

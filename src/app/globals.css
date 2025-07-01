@@ -11,3 +11,13 @@
 .para {
     @apply font-medium text-[16px] leading-7 tracking-[-0.32px] text-[#858585]
 }
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
