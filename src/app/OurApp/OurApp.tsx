@@ -1,10 +1,10 @@
-"use client"
-import Image from "next/image"
-import Overlay from "@/components/Reuseables/Overlay"
-import { Swiper, SwiperSlide } from "swiper/react"
-import { Autoplay } from "swiper/modules"
-import "swiper/css"
-import "swiper/css/autoplay"
+"use client";
+import Image from "next/image";
+import Overlay from "@/components/Reuseables/Overlay";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/autoplay";
 
 const sliderImages = [
   "/mobile-left.jpg",
@@ -15,14 +15,19 @@ const sliderImages = [
   "/slider2.jpg",
   "/slider3.jpg",
   "/center-screen.jpg",
-]
+];
 
 const OurApp = () => {
   return (
     <section className="w-full bg-[#8670E5] flex flex-col items-center py-8 sm:py-12 md:py-10 lg:py-16 overflow-hidden">
       {/* Section Heading */}
       <div className="flex flex-col items-center gap-3 sm:gap-4 md:gap-5 mt-4 sm:mt-6 md:mt-8 lg:mt-10 max-w-xs sm:max-w-md md:max-w-4xl text-center px-4">
-        <Overlay text="Our App" width={127} color="#FFFFFF" backgroundColor="rgba(255, 255, 255, 0.15)" />
+        <Overlay
+          text="Our App"
+          width={127}
+          color="#FFFFFF"
+          backgroundColor="rgba(255, 255, 255, 0.15)"
+        />
         <h2 className="text-xl sm:text-2xl md:text-4xl lg:text-3xl xl:text-4xl font-bold text-white">
           Join BC Appa Today - Where Your Money Is Always Protected!
         </h2>
@@ -42,7 +47,7 @@ const OurApp = () => {
           speed={1000}
           spaceBetween={8}
           breakpoints={{
-            // Small screens - my responsive styling
+            // Small screens - responsive styling
             0: {
               slidesPerView: 1,
               spaceBetween: 6,
@@ -55,14 +60,14 @@ const OurApp = () => {
               slidesPerView: 1,
               spaceBetween: 10,
             },
-            // Large screens - your original breakpoints
+            // Large screens - original breakpoints
             768: {
               slidesPerView: 3,
               spaceBetween: 24,
             },
             1024: {
               slidesPerView: 4,
-              spaceBetween: 24,
+              spaceBetween: 20,
             },
             1280: {
               slidesPerView: 5,
@@ -74,14 +79,14 @@ const OurApp = () => {
             <SwiperSlide key={index} className="flex justify-center">
               <div
                 className="relative 
-                  /* Small screens - my responsive styling */
+              
                   w-[140px] h-[280px] mx-auto
                   xs:w-[160px] xs:h-[320px]
-                  sm:w-[180px] sm:h-[360px]
-                  /* Medium/Large screens - your original styling */
+                  sm:w-[180px] sm:h-[360px] 
                   md:w-[255px] md:h-[535px] md:ml-[-2px] md:mx-0
-                  lg:w-[200px] lg:h-[505px] lg:ml-24
-                  xl:w-[255px] xl:h-[535px] xl:ml-[-4px]
+                  min-[912px]:w-[240px] min-[912px]:h-[520px] min-[912px]:ml-10 min-[912px]:mx-0
+                  lg:w-[220px] lg:h-[480px] lg:ml-4 lg:mx-0
+                  xl:w-[240px] xl:h-[520px] xl:ml-4 xl:mx-0
                   2xl:w-[275px] 2xl:h-[565px] 2xl:ml-[4px]
                 "
               >
@@ -104,19 +109,25 @@ const OurApp = () => {
             w-[170px] h-[310px]
             xs:w-[180px] xs:h-[340px]
             sm:w-[200px] sm:h-[380px]
-            /* Medium/Large screens - properly sized to fit over phone images */
+            /* Medium/Large screens - adjusted for all problematic resolutions */
             md:w-[295px] md:h-[580px]
-            lg:w-[240px] lg:h-[540px]
-            xl:w-[290px] xl:h-[570px]
+            min-[912px]:w-[280px] min-[912px]:h-[560px]
+            lg:w-[260px] lg:h-[520px]
+            xl:w-[280px] xl:h-[560px]
             2xl:w-[325px] 2xl:h-[615px]
           "
           >
-            <Image src="/center-frame.png" alt="Phone frame" fill className="object-contain" />
+            <Image
+              src="/center-frame.png"
+              alt="Phone frame"
+              fill
+              className="object-contain"
+            />
           </div>
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default OurApp
+export default OurApp;
