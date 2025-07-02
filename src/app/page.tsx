@@ -17,19 +17,19 @@ export default function Home() {
   return (
     <>
    <Hero />
-   <About />
-   <Vision />
-   <Counter />
-   <Work />
-   <Mind />
-   <Features />
-   <Mind2 />
-   <OurApp />
-   <Blog />
-   <Testimonial />
-   <FAQs />
-   <OurApp2 />
-   <Footer />
+      <section id="about"><About /></section>
+      <Vision />
+      <Counter />
+      <section id="how-it-works"><Work /></section>
+      <Mind />
+      <section id="features"><Features /></section>
+      <Mind2 />
+      <section id="our-app"><OurApp /></section>
+      <section id="blog"><Blog /></section>
+      <section id="testimonials"><Testimonial /></section>
+      <section id="faqs"><FAQs /></section>
+      <OurApp2 />
+      <Footer />
     </>
   );
 }

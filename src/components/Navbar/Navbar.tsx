@@ -6,7 +6,16 @@ import { HiMenu, HiX } from "react-icons/hi"
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
-  const Navlinks = ["Home", "About", "How it works", "Features", "Our App", "Blog", "Testimonials", "FAQ's"]
+  const Navlinks = [
+    { label: "Home", href: "#home" },
+    { label: "About", href: "#about" },
+    { label: "How it works", href: "#how-it-works" },
+    { label: "Features", href: "#features" },
+    { label: "Our App", href: "#our-app" },
+    { label: "Blog", href: "#blog" },
+    { label: "Testimonials", href: "#testimonials" },
+    { label: "FAQ's", href: "#faqs" },
+  ]
 
   return (
     <div className="h-[80px] sm:h-[90px] lg:h-[106px] w-full flex items-center justify-between px-4 sm:px-6 lg:px-[100px] font-[Urbanist] relative z-50">
@@ -15,11 +24,17 @@ const Navbar = () => {
           Bc Appa
         </h1>
       </div>
-  <div className="hidden lg:flex items-center gap-[30px] h-full">
-        {Navlinks.map((item, index) => (
-          <div key={index} className="flex items-center justify-center h-full">
-            <p className=" hover:text-[#8670E5] cursor-pointer font-semibold text-[#282C32] leading-7 whitespace-nowrap">{item}</p>
-          </div>
+
+      {/* Desktop Nav */}
+      <div className="hidden lg:flex items-center gap-[30px] h-full">
+        {Navlinks.map((link, index) => (
+          <a
+            key={index}
+            href={link.href}
+            className="hover:text-[#8670E5] cursor-pointer font-semibold text-[#282C32] leading-7 whitespace-nowrap"
+          >
+            {link.label}
+          </a>
         ))}
       </div>
 
@@ -28,16 +43,24 @@ const Navbar = () => {
         <GoArrowRight className="text-white text-lg" />
       </button>
 
+      {/* Mobile Menu Toggle */}
       <button className="lg:hidden p-2" onClick={() => setIsMenuOpen(!isMenuOpen)}>
         {isMenuOpen ? <HiX className="text-2xl text-[#282C32]" /> : <HiMenu className="text-2xl text-[#282C32]" />}
       </button>
+
+      {/* Mobile Menu */}
       {isMenuOpen && (
         <div className="lg:hidden absolute top-full left-0 w-full bg-white shadow-lg border-t z-40">
           <div className="flex flex-col py-4">
-            {Navlinks.map((item, index) => (
-              <div key={index} className="px-4 py-3 border-b border-gray-100 last:border-b-0">
-                <p className="font-semibold text-[#282C32] leading-7">{item}</p>
-              </div>
+            {Navlinks.map((link, index) => (
+              <a
+                key={index}
+                href={link.href}
+                className="px-4 py-3 border-b border-gray-100 last:border-b-0 font-semibold text-[#282C32] leading-7"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                {link.label}
+              </a>
             ))}
             <div className="px-4 py-4">
               <button className="bg-[#8670E5] w-full h-12 rounded-full flex justify-center items-center gap-2">

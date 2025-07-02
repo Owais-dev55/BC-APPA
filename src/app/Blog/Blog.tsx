@@ -1,6 +1,9 @@
+'use client'
 import React from "react";
 import Overlay from "@/components/Reuseables/Overlay";
 import Image from "next/image";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const boxContent = [
   {
@@ -21,6 +24,11 @@ const boxContent = [
 ];
 
 const Blog = () => {
+  React.useEffect(() => {
+    AOS.init({
+      duration: 1000,
+    });
+  }, []);
   return (
     <div className="w-full flex flex-col items-center mt-8 sm:mt-14 gap-10 sm:gap-16 px-4 sm:px-6 font-[Urbanist]">
       <div className="w-full max-w-[1450px] flex flex-col items-center gap-3 sm:gap-4 text-center">
@@ -33,6 +41,7 @@ const Blog = () => {
       <div className="w-full max-w-[1450px] flex flex-wrap justify-center gap-4 sm:gap-6 md:gap-7">
         {boxContent.map((item, index) => (
           <div
+          data-aos="zoom-in-right"
             key={index}
             className="w-full max-w-full sm:max-w-[376px] flex flex-col items-center justify-center gap-5 sm:gap-7 border border-[#E6E6E6] rounded-2xl p-4 sm:p-5"
           >
