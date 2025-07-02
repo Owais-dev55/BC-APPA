@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import { AiFillApple } from "react-icons/ai";
 import { FaAndroid } from "react-icons/fa";
 import { FiPhoneCall } from "react-icons/fi";
@@ -10,14 +9,15 @@ import { FaLinkedin } from "react-icons/fa";
 import { FaPinterestSquare } from "react-icons/fa";
 
 const Footer = () => {
-  const Navlinks = [
-    "Home",
-    "About Us",
-    "Integration",
-    "Features",
-    "Pricing",
-    "Contact Us",
-  ];
+ const Navlinks = [
+  { name: "Home", href: "#home" },
+  { name: "About Us", href: "#about" },
+  { name: "Integration", href: "#home" },
+  { name: "Features", href: "#features" },
+  { name: "Pricing", href: "#home" },
+  { name: "Contact Us", href: "#home" },
+];
+
 
   return (
     <div className="w-full h-auto lg:h-[90%] flex flex-col bg-[#EFEFEF] overflow-hidden mt-8 sm:mt-12 lg:mt-16">
@@ -85,13 +85,13 @@ const Footer = () => {
             className="w-full lg:w-[204px] mt-6 lg:mt-10 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-1 gap-4 lg:gap-7 "
           >
             {Navlinks.map((link, idx) => (
-              <Link
+              <a
                 key={idx}
-                href=""
+                href={link.href}
                 className="text-sm sm:text-base leading-relaxed text-[#4A4A4A]"
               >
-                {link}
-              </Link>
+                {link.name}
+              </a>
             ))}
           </div>
         </div>

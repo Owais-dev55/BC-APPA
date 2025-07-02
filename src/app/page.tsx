@@ -16,7 +16,9 @@ import Work from "@/app/Work/Work";
 export default function Home() {
   return (
     <>
+    <section id='home'className="pt-[80px] sm:pt-[90px] lg:pt-[106px]" >
    <Hero />
+    </section>
       <section id="about"><About /></section>
       <Vision />
       <Counter />
